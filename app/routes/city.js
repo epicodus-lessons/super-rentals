@@ -15,12 +15,13 @@ export default Ember.Route.extend({
     saveRental(params) {
       var newRental = this.store.createRecord('rental', params);
       var city = params.city;
-      city.get('rentals').addObject(newRental);
       newRental.save().then(function() {
-        return city.save();
+        city.get('rentals').addObject(newRental);
+        city.save();
+        this.transitionTo('city', params.city);
+      }).catch(function(thingy) {
+        console.log(thingy.errors);
       });
-    alert(city.get('rentals'.length));
-      this.transitionTo('city', params.city);
     },
 
     destroyCity(city) {

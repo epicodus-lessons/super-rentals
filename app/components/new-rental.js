@@ -7,14 +7,13 @@ export default Ember.Component.extend({
       this.set('addNewRental', true);
     },
 
-    saveRental() {
+    saveRental(city) {
       var params = {
         owner: this.get('owner'),
         city: this.get('city'),
         type: this.get('type'),
         image: this.get('image'),
         bedrooms: this.get('bedrooms'),
-        cost_per_night: 100,
         date_added: Date.now()
       };
       this.set('addNewRental', false);
